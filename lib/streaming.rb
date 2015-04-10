@@ -14,6 +14,10 @@ module Streaming
       @disabled = true
     end
 
+    def enable!
+      @disabled = nil
+    end
+
     def disabled?
       @disabled
     end
@@ -27,15 +31,15 @@ module Streaming
     end
 
     def publish channel, message
-      redis.publish channel, message
+      redis.publish(channel, message) unless disabled?
     end
 
     def subscribe_to channel, &block
-      hiredis.pubsub.psubscribe channel, &block
+      hiredis.pubsub.psubscribe(channel, &block) unless disabled?
     end
 
     def unsubscribe_from channel
-      hiredis.pubsub.punsubscribe channel
+      hiredis.pubsub.punsubscribe(channel) unless disabled?
     end
   end
 end

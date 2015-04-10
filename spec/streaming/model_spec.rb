@@ -51,6 +51,12 @@ module Streaming
         foo.expects(:serialize_for_streaming).with only: [:name]
         foo.publish_to_stream :create, serialize: { only: [:name] }
       end
+
+      it 'should not do anything when disabled' do
+        Streaming.stubs(:disabled?).returns(true)
+        Streaming.expects(:redis).never
+        foo.publish_to_stream :create
+      end
     end
 
     describe '#serialize_for_streaming' do

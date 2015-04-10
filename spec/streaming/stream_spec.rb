@@ -88,6 +88,12 @@ module Streaming
           expected_out = ["event: create\n", "data: i love ligers\n\n"]
           received.must_equal ['ligers:create', 'i love ligers', expected_out]
         end
+
+        it 'should not do anything when disabled' do
+          Streaming.stubs(:disabled?).returns(true)
+          Streaming.expects(:hiredis).never
+          instance.subscribe_to '*', []
+        end
       end
     end
   end

@@ -9,4 +9,5 @@ ActiveRecord::Base.establish_connection adapter: 'sqlite3', database: 'test.sqli
 ActiveRecord::Base.raise_in_transactional_callbacks = true
 
 require_relative './support/expectations'
+require_relative './support/fake_redis'
 require_relative './support/models'

@@ -40,7 +40,7 @@ end
 define_task :spec, spec_files
 task :default => :spec
 
-namespace :example do
+task :example do
   puts "Running example/change_data.rb in a separate thread."
   Thread.new { ruby 'example/change_data.rb' }
 

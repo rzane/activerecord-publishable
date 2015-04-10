@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "streaming"
   spec.version       = Streaming::VERSION
   spec.authors       = ["Ray Zane"]
-  spec.email         = ["rzane@bodnargroup.com"]
+  spec.email         = ["raymondzane@gmail.com"]
   spec.summary       = %q{Simple server-side events for ActiveRecord models.}
   spec.description   = %q{Publish events to the client when your models change using Redis and SSE.}
   spec.homepage      = "https://github.com/rzane/streaming"

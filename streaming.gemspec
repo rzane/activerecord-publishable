@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Ray Zane"]
   spec.email         = ["rzane@bodnargroup.com"]
   spec.summary       = %q{Simple server-side events for ActiveRecord models.}
-  spec.description   = %q{Push changes to your models to your client using Redis.}
-  spec.homepage      = ""
+  spec.description   = %q{Publish events to the client when your models change using Redis and SSE.}
+  spec.homepage      = "https://github.com/rzane/streaming"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

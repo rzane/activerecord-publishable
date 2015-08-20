@@ -37,14 +37,14 @@ module ActiveRecord
         Array(options.fetch(:on, [:create, :update, :destroy])).each do |verb|
           after_commit options.merge(on: verb) do
             unless ActiveRecord::Publishable.disabled?
-              publish_to_stream verb, options
+              publish_action(verb, options)
             end
           end
         end
       end
     end
 
-    def publish_to_stream(action, options = {})
+    def publish_action(action, options = {})
       channel = options[:channel] || channel_for_publishing(action)
       data = serialize_for_publishing(options.fetch(:serialize, {}))
 

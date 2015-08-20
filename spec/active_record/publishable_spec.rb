@@ -83,25 +83,25 @@ module ActiveRecord
     let(:foo) { Foo.new name: 'foo' }
     let(:bar) { Bar.new name: 'bar' }
 
-    describe '#publish_to_stream' do
+    describe '#publish_action' do
       let(:channel) { foo.channel_for_publishing :create }
       let(:data)    { foo.serialize_for_publishing }
 
       it 'should publish the event and data' do
         Publishable.expects(:publish).with(channel, data.to_json)
-        foo.publish_to_stream(:create)
+        foo.publish_action(:create)
       end
 
       it 'should pass :serialize option to #serialize_for_publishing' do
         Publishable.stubs :publish
         foo.expects(:serialize_for_publishing).with only: [:name]
-        foo.publish_to_stream :create, serialize: { only: [:name] }
+        foo.publish_action :create, serialize: { only: [:name] }
       end
 
       it 'should not do anything when disabled' do
         Publishable.stubs(:disabled?).returns(true)
         Publishable.expects(:redis).never
-        foo.publish_to_stream :create
+        foo.publish_action :create
       end
     end
 

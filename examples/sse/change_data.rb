@@ -1,9 +1,9 @@
 require 'bundler'
 Bundler.require :default
-require File.expand_path('../models/post', __FILE__)
+
+require_relative './post'
 
 # Running this file will create/update/delete records for demonstration purposess.
-
 module Changer
   extend self
 

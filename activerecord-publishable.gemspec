@@ -1,15 +1,15 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'streaming/version'
+require 'active_record/publishable/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "streaming"
-  spec.version       = Streaming::VERSION
+  spec.name          = "activerecord-publishable"
+  spec.version       = ActiveRecord::Publishable::VERSION
   spec.authors       = ["Ray Zane"]
   spec.email         = ["raymondzane@gmail.com"]
-  spec.summary       = %q{Simple server-side events for ActiveRecord models.}
-  spec.description   = %q{Publish events to the client when your models change using Redis and SSE.}
+  spec.summary       = %q{Redis PubSub for ActiveRecord models.}
+  spec.description   = %q{Publish events to Redis when your models change.}
   spec.homepage      = "https://github.com/rzane/streaming"
   spec.license       = "MIT"
 
@@ -18,9 +18,9 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "sinatra", ">= 1.3.0"
-  spec.add_dependency "em-hiredis"
   spec.add_dependency "redis"
+  spec.add_dependency "activerecord"
+  spec.add_dependency "activesupport"
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"

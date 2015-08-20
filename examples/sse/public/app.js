@@ -1,13 +1,15 @@
+'use strict';
+
 window.App = function(url, verbs) {
   this.verbs = verbs;
   this.stream = new EventSource(url);
   this.el = $('#posts');
-  this.bindEvents();
 };
 
 $.extend(App.prototype, {
-  bindEvents: function() {
-    var that = this;
+  start: function() {
+    var post,
+        that = this;
 
     this.stream.addEventListener('open', function() {
       console.log('Listening to ' + this.url);
@@ -16,7 +18,7 @@ $.extend(App.prototype, {
     // Bind create, update, and destroy
     $.each(this.verbs, function(index, verb) {
       that.stream.addEventListener(verb, function(event) {
-        var post = JSON.parse(event.data);
+        post = JSON.parse(event.data);
         console.log(verb, post);
         that[verb](post);
       });
@@ -64,5 +66,5 @@ $.extend(App.prototype, {
 });
 
 $(document).ready(function() {
-  new App('/stream/posts', ['create', 'update', 'destroy']);
+  new App('/events/posts', ['create', 'update', 'destroy']).start();
 });

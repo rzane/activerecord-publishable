@@ -1,7 +1,7 @@
-require 'active_record'
-require 'streaming'
+require 'bundler'
+Bundler.require :default
 
-# Connect to an in-memory database
+# Connect to an inmemory database
 ActiveRecord::Base.establish_connection adapter: 'sqlite3',
                                         database: 'db.sqlite3'
 
@@ -16,6 +16,7 @@ end unless conn.table_exists?(:posts)
 
 # Here's the important part. Define our model and enable streaming.
 class Post < ActiveRecord::Base
-  include Streaming::Model
-  streamable
+  include ActiveRecord::Publishable
+
+  publishable
 end

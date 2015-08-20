@@ -20,30 +20,24 @@ Bundler::GemHelper.install_tasks
 
 require "rake/testtask"
 
-spec_files        = FileList['spec/**/*_spec.rb']
-integration_files = FileList['spec/integration_spec.rb']
-unit_files        = spec_files - integration_files
-
-def define_task name, files
-  Rake::TestTask.new name do |t|
-    t.libs << 'lib' << 'spec'
-    t.test_files = files
-    t.verbose = false
-  end
+Rake::TestTask.new :spec do |t|
+  t.libs << 'lib' << 'spec'
+  t.test_files = FileList['spec/**/*_spec.rb']
+  t.verbose = false
 end
 
-namespace :spec do
-  define_task :unit, unit_files
-  define_task :integration, integration_files
-end
-
-define_task :spec, spec_files
 task :default => :spec
 
-task :example do
-  puts "Running example/change_data.rb in a separate thread."
-  Thread.new { ruby 'example/change_data.rb' }
+namespace :examples do
+  namespace :sse do
+    task :app do
+      ruby 'examples/sse/app.rb'
+    end
 
-  puts "Starting example/app.rb"
-  ruby 'example/app.rb'
+    task :data do
+      ruby 'examples/sse/change_data.rb'
+    end
+  end
+
+  multitask :sse => ['sse:app', 'sse:data']
 end

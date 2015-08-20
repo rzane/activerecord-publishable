@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["raymondzane@gmail.com"]
   spec.summary       = %q{Redis PubSub for ActiveRecord models.}
   spec.description   = %q{Publish events to Redis when your models change.}
-  spec.homepage      = "https://github.com/rzane/streaming"
+  spec.homepage      = "https://github.com/rzane/activerecord-publishable"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")

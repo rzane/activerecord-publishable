@@ -36,7 +36,9 @@ module ActiveRecord
       def publishable(options = {})
         Array(options.fetch(:on, [:create, :update, :destroy])).each do |verb|
           after_commit options.merge(on: verb) do
-            publish_to_stream verb, options
+            unless ActiveRecord::Publishable.disabled?
+              publish_to_stream verb, options
+            end
           end
         end
       end
@@ -60,7 +62,7 @@ module ActiveRecord
       serializer ? serializer.new(self, opts) : as_json(opts)
     end
 
-    def channel_for_publishing action
+    def channel_for_publishing(action)
       "#{self.class.model_name.collection}:#{action}"
     end
   end

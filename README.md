@@ -40,7 +40,7 @@ publishable on: :create, if: :some_condition?
 publishable on: :create, unless: ->{ dont_push? }
 ```
 
-When pushing to Redis, your model will be serialized as JSON. If you have ActiveModel::Serializers loaded, your serializer will be looked up. Otherwise, `as_json` will be used.
+When pushing to Redis, your model will be serialized as JSON. If you have `ActiveModel::Serializers` loaded, your serializer will be looked up. Otherwise, `as_json` will be used.
 
 You can pass options for serialization by using the `:serialize` option. The `:with` option allows you to override the serializer that is used.
 

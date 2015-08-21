@@ -1,5 +1,4 @@
 require 'redis'
-require 'active_support/concern'
 require 'active_record/publishable/version'
 
 module ActiveRecord
